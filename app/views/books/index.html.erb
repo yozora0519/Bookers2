@@ -1,5 +1,6 @@
-<%= @books.each do |book| %>
+<% @books.each do |book| %>
 
+<% end %>
 <main>
   <p id="notice"></p>
   <div class="container px-5 px-sm-0">
@@ -7,20 +8,20 @@
     <div class="row">
       <div class="col-md-3">
         <h2>User info</h2>
-        <img src="https://bookers-level2.herokuapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBKzhyQWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--f4bae67380754875eae798715c410e79cec274e5/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVdscGFRPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--4a929dbc7794f3c4610ba9ba5402762ad9cd1a14/default-image.jpg">
-          <table class="table">
-            <tbody>
-              <tr></tr>
-              <tr>
-	              <th>name</th>
-	              <th></th>
-              </tr>
-              <tr>
-	              <th>introduction</th>
-	              <th></th>
-              </tr>
-            </tbody>
-          </table>
+        <%= image_tag @user.get_profile_image(100,100) %>
+        <table class="table">
+          <tbody>
+            <tr></tr>
+            <tr>
+	             <th>name</th>
+	             <th><%= @user.name %></th>
+            </tr>
+            <tr>
+	             <th>introduction</th>
+	             <th><%= @user.introduction %></th>
+            </tr>
+          </tbody>
+        </table>
 
     <div class="row">
       <a class="btn btn-outline-secondary btn-block edit_user_50074" href="/users/50074/edit">
@@ -28,19 +29,21 @@
       </a>
     </div>
     <h2 class="mt-3">New book</h2>
-    <form action="/books" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="AEGSlYQXkzsqKzunZwEzhwitGCsso-0hpiWrSB1Ybsp2CIsMsFIRHuReFbw5LY9SfjTGvpwgGBobfyNCEbrgKw" autocomplete="off">
+
+    <%= form_with model: @book do |f| %>
     <div class="form-group">
-      <label for="book_title">Title</label>
-      <input class="form-control book_title" type="text" name="book[title]" id="book_title">
+      <label>Title</label>
+      <%= f.text_field :title, class: "form-control book_title" %>
     </div>
     <div class="form-group">
-      <label for="book_opinion">Opinion</label>
-      <textarea class="form-control book_body" name="book[body]" id="book_body"></textarea>
+      <label>Opinion</label>
+      <%= f.text_area :body, class: "form-control book_body" %>
     </div>
     <div class="form-group">
-      <input type="submit" name="commit" value="Create Book" class="btn btn-success" data-disable-with="Create Book">
+      <%= f.submit "Create Book", class: "btn btn-success" %>
     </div>
-    </form>
+    <% end %>
+
     </div>
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
