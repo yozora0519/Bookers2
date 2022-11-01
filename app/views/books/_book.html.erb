@@ -16,9 +16,9 @@
     </table>
 
   <div class="row">
-    <a class="btn btn-outline-secondary btn-block edit_user_50074" href="/users/50074/edit">
+    <%= link_to edit_user_path(user), class: 'btn btn-outline-secondary btn-block' do %>
       <i class="fas fa-user-cog"></i>
-    </a>
+    <% end %>
   </div>
     <h2 class="mt-3">New book</h2>
     <%= form_with model: book do |f| %>
